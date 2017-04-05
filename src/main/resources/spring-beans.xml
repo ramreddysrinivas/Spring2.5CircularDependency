@@ -1,0 +1,53 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!-- <bean id="baseClass1" class="com.spring.constructor.BaseClass"> 
+	<constructor-arg  ref="dependentClass" /> 
+		</bean> 
+		<bean id="dependentClass" class="com.spring.constructor.DependentClass1"> 
+		<constructor-arg ref="baseClass1"/> 
+		</bean> 
+		-->
+	<!-- the above dependency injection will give circular dependency Exception. 
+		thats why we follow setter injection -->
+		
+		<!--
+		<bean id="baseClass1" class="com.spring.constructor.BaseClass">
+		<property name="dependentClass1" ref="dependentClass"/>
+		</bean>
+		<bean id="dependentClass" class="com.spring.constructor.DependentClass1">
+		<property name="baseClass" ref="baseClass1"/>
+		</bean> 
+		--> <!-- No exception -->
+		
+		
+		<!-- 
+		<bean id="baseClass1" class="com.spring.constructor.BaseClass"> 
+		<constructor-arg ref="dependentClass" />
+		</bean>
+		<bean id="dependentClass" class="com.spring.constructor.DependentClass1">
+		<property name="baseClass" ref="baseClass1"/>
+		</bean> 
+		 -->
+		  <!-- circular dependency Exception. -->
+		
+		
+		<!--  <bean id="baseClass1" class="com.spring.constructor.BaseClass">
+		<property name="dependentClass1" ref="dependentClass"/>
+		</bean>
+		 <bean id="dependentClass" class="com.spring.constructor.DependentClass1"> 
+		<constructor-arg ref="baseClass1"/> 
+		</bean>  -->
+		<!-- no exception -->
+		
+		
+		<bean id="dependentClass" class="com.spring.constructor.DependentClass1">
+			<property name="baseClass" ref="baseClass1"/>
+		</bean> 
+		<bean id="baseClass1" class="com.spring.constructor.BaseClass"> 
+			<constructor-arg  ref="dependentClass" /> 
+		</bean> 
+		<!-- no exception -->
+		
+</beans>
